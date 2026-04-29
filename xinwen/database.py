@@ -4,15 +4,18 @@
 需要安装的依赖包：
 pip install sqlalchemy aiomysql
 """
-
+import os
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 from typing import AsyncGenerator
 
 # 数据库连接 URL
 # 格式: mysql+aiomysql://用户名:密码@主机:端口/数据库名 mysql+aiomysql://root:123456@localhost:3306/xinwen
-DATABASE_URL = "postgresql+asyncpg://postgres.xfdtlbcutfuvlxfipwda:%40HY18965axy@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres"
 
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "mysql+aiomysql://root:123456@localhost:3306/xinwen"
+)
 # 创建异步引擎
 engine = create_async_engine(
     DATABASE_URL,
