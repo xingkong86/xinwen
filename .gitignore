@@ -1,0 +1,12 @@
+# Python 忽略项
+.venv/
+__pycache__/
+*.pyc
+
+# 前端忽略项
+node_modules/
+dist/
+
+# 环境变量和系统文件
+.env
+.DS_Store
