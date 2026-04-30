@@ -4,7 +4,7 @@ import axios from 'axios'
 const request = axios.create({
   // 这里把原本的 '' 替换成了你后端的真实地址
   baseURL: import.meta.env.PROD ? 'https://xinwen-production.up.railway.app' : 'http://localhost:8000', 
-  timeout: 10000
+  timeout: 60000
 })
 
 // 请求拦截器
