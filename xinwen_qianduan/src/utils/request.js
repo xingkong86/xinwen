@@ -1,9 +1,9 @@
 import axios from 'axios'
 
 // 创建 axios 实例
-// 改造后
 const request = axios.create({
-  baseURL: import.meta.env.PROD ? '' : 'http://localhost:8000', // 本地开发用 8000，线上直接请求当前域名
+  // 这里把原本的 '' 替换成了你后端的真实地址
+  baseURL: import.meta.env.PROD ? 'https://xinwen-houduan.vercel.app' : 'http://localhost:8000', 
   timeout: 10000
 })
 

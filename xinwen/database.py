@@ -14,7 +14,7 @@ from typing import AsyncGenerator
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "mysql+aiomysql://root:123456@localhost:3306/xinwen"
+    "postgresql+asyncpg://postgres.xfdtlbcutfuvlxfipwda:%40HY18965axy@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres"
 )
 # 创建异步引擎
 engine = create_async_engine(
