@@ -412,7 +412,7 @@ const handleDateRangeChange = () => {
 const refreshData = async () => {
   loading.value = true
   try {
-    await Promise.all([
+    await Promise.allSettled([
       fetchDailyStats(),
       fetchOverviewStats(),
       fetchLatestNews(),

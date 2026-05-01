@@ -13,6 +13,7 @@ from dotenv import load_dotenv
 # 格式: mysql+aiomysql://用户名:密码@主机:端口/数据库名 mysql+aiomysql://root:123456@localhost:3306/xinwen
 
 DATABASE_URL = os.getenv("DATABASE_URL")
+DB_ECHO = os.getenv("DB_ECHO", "false").lower() == "true"
 
 # 添加一个安全校验，如果没有读到环境变量直接报错，防止带着空配置跑下去
 if not DATABASE_URL:
@@ -20,10 +21,13 @@ if not DATABASE_URL:
 # 创建异步引擎
 engine = create_async_engine(
     DATABASE_URL,
-    echo=True,  # 开发环境下打印 SQL 语句，生产环境建议设为 False
+    # 线上关闭 SQL 明细日志，降低 I/O 压力；需要排障时可通过 DB_ECHO=true 开启
+    echo=DB_ECHO,
     pool_pre_ping=True,  # 连接池预检查，确保连接有效
     pool_size=10,  # 连接池大小
     max_overflow=20,  # 连接池最大溢出数
+    # Supabase 常配合 pgbouncer（transaction pool mode），关闭 statement cache 可避免偶发 prepared statement 错误
+    connect_args={"statement_cache_size": 0} if DATABASE_URL.startswith("postgresql+asyncpg://") else {},
 )
 
 # 创建异步会话工厂
