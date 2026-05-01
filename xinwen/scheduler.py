@@ -65,13 +65,13 @@ def setup_scheduler():
     配置调度器，添加定时任务
     
     任务配置：
-    - 每隔 4 小时执行一次新闻爬取
+    - 每隔 8 小时执行一次新闻爬取
     - 任务 ID: news_crawl_job
     """
-    # 添加定时任务：每隔 4 小时执行一次
+    # 添加定时任务：每隔 8 小时执行一次
     scheduler.add_job(
         scheduled_news_crawl,
-        trigger=IntervalTrigger(hours=4),
+        trigger=IntervalTrigger(hours=8),
         id="news_crawl_job",
         name="新闻爬取定时任务",
         replace_existing=True,  # 如果已存在则替换
@@ -79,7 +79,7 @@ def setup_scheduler():
         misfire_grace_time=3600,  # 允许 1 小时的错过容忍时间
     )
     
-    logger.info("调度器配置完成，已添加新闻爬取定时任务（每 4 小时执行一次）")
+    logger.info("调度器配置完成，已添加新闻爬取定时任务（每 8 小时执行一次）")
 
 
 def start_scheduler():
